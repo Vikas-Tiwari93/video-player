@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      section {
+        width: 55vw;
+        height: 60vh;
+        display: flex;
+      }
+      .videomain {
+        width: 100%;
+        min-width: 670px;
+        height: 100%;
+        position: relative;
+      }
+      .videohead {
+        height: 40px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+      }
+      video {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        object-fit: cover;
+      }
+
+      .controls {
+        display: flex;
+        height: 40px;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background-color: rgba(0, 0, 0, 0.734);
+      }
+
+      .Lcontrol,
+      .Rcontrol {
+        width: 50%;
+        height: 100%;
+        gap: 6px;
+        display: flex;
+        align-items: center;
+      }
+      .Rcontrol {
+        justify-content: end;
+      }
+
+      .btn {
+        width: 50px;
+        height: 90%;
+
+        overflow: hidden;
+      }
+      .btnsound {
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
+      .play {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+      .pause {
+        display: none;
+      }
+      .btncollapse {
+        width: 1px;
+        overflow: hidden;
+        transition: 0.4s ease-in-out;
+        display: flex;
+        align-items: center;
+      }
+      .btncollapse input {
+        accent-color: white;
+        cursor: pointer;
+        box-shadow: -2px 2px -3px rgba(255, 255, 255, 0.488);
+        height: 5px;
+        width: 100%;
+      }
+      .btnsound:hover span {
+        width: 100px;
+      }
+      #time {
+        height: 90%;
+
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        color: white;
+        padding: 2px;
+      }
+      .settingopt {
+        display: none;
+      }
+      #settingopt div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 35px;
+        margin-top:6px
+      }
+      #settingopt div:hover{
+        cursor: pointer;
+        background-color: rgb(72, 71, 71);
+      }
+      .L,.R{padding-left:10px;
+        display: flex;
+        align-items: center;
+        gap:8px;
+
+      }
+      .Ll{display: flex;
+        align-items: center;
+        gap:0px;
+
+      }
+      .settingoptV {
+        flex-direction: column;
+        
+        color: white;
+        margin: 7px;
+        position: absolute;
+        background-color: rgb(36, 35, 35);
+        width: 270px;
+        height: 170px;
+        border-radius: 10px;
+        opacity: 0.9;
+        bottom: 45px;
+        right: 40px;
+        transition: 0.1s ease-in-out;
+      }
+      .videomain .mainprogress {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        bottom: 35px;
+        width: 100%;
+        left: 0px;
+      }
+      #mainrange{
+        accent-color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section onclick="">
+      <div class="videomain">
+        <div class="videohead"></div>
+        <video
+          id="vid"
+          src="./assets/video/THe Art of Living - Surya Namaskar-Part 1 for beginners - YouTube.mp4"
+        ></video>
+
+        <div class="controls">
+          <div class="Lcontrol">
+            <span class="btn" onclick=" playpause()"
+              ><img
+                src="./svg/videoplayer/play.svg"
+                alt=""
+                class="pause"
+                id="play"
+                onclick="playy()" />
+              <img
+                src="./svg/videoplayer/pause.svg"
+                alt=""
+                class="play"
+                id="pause"
+                id="sound"
+                onclick="pausee()"
+            /></span>
+            <span id="next" class="btn"
+              ><img
+                src="./svg/videoplayer/next.svg"
+                alt=""
+                class="play"
+                onclick="reload()" /></span
+            ><span class="btnsound">
+              <a class="btn" onclick="sound()"
+                ><img
+                  src="./svg/videoplayer/sound (1).svg"
+                  alt=""
+                  class="play"
+                  id="volumeon"
+                  onclick="mutee()" /><img
+                  src="./svg/videoplayer/mutesvg.svg"
+                  alt=""
+                  class="play"
+                  id="volumeoff"
+                  onclick="unmutee()"
+              /></a>
+              <span id="volprogress" class="btncollapse"
+                ><input
+                  type="range"
+                  value=""
+                  max="100"
+                  id="progressin"
+                  onclick="soundval()" /></span
+            ></span>
+            <span id="time">
+              <span id="currenttime">0:00 /</span><span id="duration"></span
+            ></span>
+          </div>
+          <div class="Rcontrol">
+            <div id="autoplay" class="btn">
+              <img src="./svg/videoplayer/a" alt="" />
+            </div>
+            <div id="subtitle" class="btn">
+              <img
+                src="./svg/videoplayer/caption.svg"
+                alt=""
+                height="110%"
+                width="100%"
+              />
+            </div>
+            <div id="settings" class="btn" onclick="set()">
+              <img
+                src="./svg/videoplayer/settings.svg"
+                alt=""
+                height="110%"
+                width="100%"
+              />
+            </div>
+            <div id="miniplayer" class="btn">
+              <img
+                src="./svg/videoplayer/miniscreen.svg"
+                alt=""
+                height="110%"
+                width="100%"
+              />
+            </div>
+            <div id="theatre" class="btn">
+              <img
+                src="./svg/videoplayer/hometheater.svg"
+                alt=""
+                height="110%"
+                width="100%"
+              />
+            </div>
+            <div id="fullscrn" class="btn">
+              <img
+                src="./svg/videoplayer/fullscreen.svg"
+                alt=""
+                height="110%"
+                width="100%"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="settingopt" class="settingopt">
+          <div><span class="L"><img src="./svg/videoplayer/ANNOTATION.svg" alt="" class="setbtn">Annotation</span> <span class="R">Normal<img src="./svg/videoplayer/settingside.svg" alt=""></span></div>
+          <div><span class="L"><img src="./svg/videoplayer/PLAYBACKSPEED.svg" alt="" class="setbtn">Playback Speed</span> <span class="R">Normal<img src="./svg/videoplayer/settingside.svg" alt=""></span></div>
+          <div><span class="Ll"><img src="./svg/videoplayer/cc.svg" alt="" class="setbtn">SubTitles</span> <span class="R">Off<img src="./svg/videoplayer/settingside.svg" alt=""></span></div>
+          <div><span class="L"><img src="./svg/videoplayer/QUALITY.svg" alt="" class="setbtn">Quality</span> <span class="R">1080p<img src="./svg/videoplayer/settingside.svg" alt=""></span></div>
+        </div>
+        <div class="mainprogress">
+          <input type="range" id="mainrange"
+            style="width: 99%; height: 5px"
+            value=""
+            max="100"
+            onclick="clickprogress()"
+          ></input>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+<script>
+  function playpause() {
+    let playbtn = document.getElementById("play");
+    playbtn.classList.toggle("play");
+    playbtn.classList.toggle("pause");
+  }
+  function sound() {
+    let sound = document.getElementById("volumeon");
+    sound.classList.toggle("pause");
+    sound.classList.toggle("play");
+  }
+  function set() {
+    let settings = document.getElementById("settingopt");
+    settings.classList.toggle("settingoptV");
+    settings.classList.toggle("settingopt");
+    console.log("vikas");
+  }
+  function playy() {
+    let video = document.getElementById("vid");
+    video.play();
+  }
+  function pausee() {
+    let video = document.getElementById("vid");
+    video.pause();
+  }
+  function reload() {
+    let video = document.getElementById("vid");
+    video.src =
+      "./assets/video/THe Art of Living - Surya Namaskar-Part 1 for beginners - YouTube.mp4";
+    video.src =
+      "./assets/video/THe Art of Living - Surya Namaskar-Part 1 for beginners - YouTube.mp4";
+
+    video.load();
+  }
+
+  function mutee() {
+    let video = document.getElementById("vid");
+    video.volume = 0;
+    video.muted = false;
+  }
+  function unmutee() {
+    let video = document.getElementById("vid");
+    video.volume = 0.5;
+  }
+  function soundval() {
+    let soundval = document.getElementById("progressin").value;
+    let video2 = document.getElementById("vid");
+    video2.volume = soundval / 100;
+  }
+  let video = document.getElementById("vid");
+  video.muted = true;
+  video.autoplay = true;
+
+  setTimeout(function duration() {
+    let video = document.getElementById("vid");
+    let durations = document.getElementById("duration");
+    durations.innerHTML =
+      Math.floor(video.duration / 60) +
+      ":" +
+      Math.round((video.duration % 60) * 10);
+  }, 1000);
+
+  setInterval(function current() {
+    let video = document.getElementById("vid");
+    let currenttime = document.getElementById("currenttime");
+    currenttime.innerHTML =
+      Math.floor(video.currentTime / 60) +
+      ":" +
+      Math.round(video.currentTime % 60) +
+      "/";
+  }, 1000);
+  setInterval(function mainrange(){
+    let mainrange= document.getElementById('mainrange');
+    let video = document.getElementById("vid");
+    mainrange.max= video.duration;
+mainrange.value=video.currentTime;
+},1000)
+function clickprogress(){
+    let mainrange= document.getElementById('mainrange');
+    let video = document.getElementById("vid");
+    video.currentTime=mainrange.value;
+}
+
+  function loop() {
+    let video = document.getElementsByTagName("video");
+    let loop = document.getElementById("loop");
+    if (video.loop == "true") {
+      video[0].removeAttribute("loop");
+      loop.style.backgroundColor = "white";
+    }
+    video[0].setAttribute("loop", "true");
+  }
+</script>
